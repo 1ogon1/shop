@@ -15,8 +15,8 @@
         <link href="/template/css/responsive.css" rel="stylesheet">
 
         <!--[if lt IE 9]>
-        <script src="js/html5shiv.js"></script>
-        <script src="js/respond.min.js"></script>
+        <script src="/template/js/html5shiv.js"></script>
+        <script src="/template/js/respond.min.js"></script>
         <![endif]-->       
         <link rel="shortcut icon" href="/template/images/ico/favicon.ico">
         <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/template/images/ico/apple-touch-icon-144-precomposed.png">
@@ -36,8 +36,8 @@
                             <div class="col-sm-6">
                                 <div class="contactinfo">
                                     <ul class="nav nav-pills">
-                                        <li><a href="#"><i class="fa fa-phone"></i> +38 093 000 11 22</a></li>
-                                        <li><a href="#"><i class="fa fa-envelope"></i> zinchenko.us@gmail.com</a></li>
+                                        <li><a href="#"><i class="fa fa-phone"></i> номер вашого телефона</a></li>
+                                        <li><a href="#"><i class="fa fa-envelope"></i> ваш емейл</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -69,11 +69,12 @@
                                                 (<span id="cart-count"><?php echo Cart::countItems(); ?></span>)
                                             </a>
                                         </li>
-                                        <?php if (User::isGuest()): ?>                                        
-                                            <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>
-                                        <?php else: ?>
-                                            <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>
-                                            <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход</a></li>
+                                        <?php if (!User::isGuest()): ?>
+											<li><a href="/admin"><i class="fa fa-edit"></i> Админпанель</a></li>
+<!--                                            <li><a href="/user/login/"><i class="fa fa-lock"></i> Вход</a></li>-->
+<!--                                        --><?php //else: ?>
+<!--                                            <li><a href="/cabinet/"><i class="fa fa-user"></i> Аккаунт</a></li>-->
+<!--                                            <li><a href="/user/logout/"><i class="fa fa-unlock"></i> Выход</a></li>-->
                                         <?php endif; ?>
                                     </ul>
                                 </div>

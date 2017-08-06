@@ -126,6 +126,10 @@ class CartController
             $userPhone = $_POST['userPhone'];
             $userComment = $_POST['userComment'];
 
+//            echo $userName;
+//			echo $userPhone;
+//			echo $userComment;
+
             // Флаг ошибок
             $errors = false;
 
@@ -146,8 +150,8 @@ class CartController
                 if ($result) {
                     // Если заказ успешно сохранен
                     // Оповещаем администратора о новом заказе по почте                
-                    $adminEmail = 'php.start@mail.ru';
-                    $message = '<a href="http://digital-mafia.net/admin/orders">Список заказов</a>';
+                    $adminEmail = 'konovalenkoruslan@gmail.com';
+                    $message = '<a href="http://localhost:8080/admin/order">Список заказов</a>';
                     $subject = 'Новый заказ!';
                     mail($adminEmail, $subject, $message);
 

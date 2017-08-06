@@ -21,17 +21,22 @@ class Order
         $db = Db::getConnection();
 
         // Текст запроса к БД
-        $sql = 'INSERT INTO product_order (user_name, user_phone, user_comment, user_id, products) '
-                . 'VALUES (:user_name, :user_phone, :user_comment, :user_id, :products)';
+        $sql = 'INSERT INTO product_order (user_name, user_phone, user_comment, user_id, products, status) '
+                               . 'VALUES (:user_name, :user_phone, :user_comment, :user_id, :products, :status)';
 
         $products = json_encode($products);
-
+        $status = 1;
+//        $date = new DateTime('now');
+        $res = time();
+//		$res = $date->format('%Y-%M-%D %H:%I:%M%');
         $result = $db->prepare($sql);
         $result->bindParam(':user_name', $userName, PDO::PARAM_STR);
         $result->bindParam(':user_phone', $userPhone, PDO::PARAM_STR);
         $result->bindParam(':user_comment', $userComment, PDO::PARAM_STR);
-        $result->bindParam(':user_id', $userId, PDO::PARAM_STR);
+        $result->bindParam(':user_id', $userId, PDO::PARAM_INT);
+//        $result->bindParam(':date', $res, PDO::PARAM_STR);
         $result->bindParam(':products', $products, PDO::PARAM_STR);
+		$result->bindParam(':status', $status, PDO::PARAM_INT);
 
         return $result->execute();
     }

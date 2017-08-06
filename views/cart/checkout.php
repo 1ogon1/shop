@@ -49,11 +49,11 @@
                                 <div class="login-form">
                                     <form action="#" method="post">
 
-                                        <p>Ваша имя</p>
-                                        <input type="text" name="userName" placeholder="" value="<?php echo $userName; ?>"/>
+                                        <p>Ваше имя</p>
+                                        <input type="text" name="userName" placeholder="Имя" value="<?php echo $userName; ?>"/>
 
                                         <p>Номер телефона</p>
-                                        <input type="text" name="userPhone" placeholder="" value="<?php echo $userPhone; ?>"/>
+                                        <input type="text" name="userPhone" placeholder="Телефон" value="<?php echo $userPhone; ?>"/>
 
                                         <p>Комментарий к заказу</p>
                                         <input type="text" name="userComment" placeholder="Сообщение" value="<?php echo $userComment; ?>"/>

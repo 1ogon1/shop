@@ -52,7 +52,7 @@ class UserController
         require_once(ROOT . '/views/user/register.php');
         return true;
     }
-    
+
     /**
      * Action для страницы "Вход на сайт"
      */
@@ -91,7 +91,7 @@ class UserController
                 User::auth($userId);
 
                 // Перенаправляем пользователя в закрытую часть - кабинет 
-                header("Location: /cabinet");
+                header("Location: /admin");
             }
         }
 
