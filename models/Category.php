@@ -163,7 +163,7 @@ class Category
 
         // Текст запроса к БД
         $sql = 'INSERT INTO category (name, sort_order, status) '
-                . 'VALUES (:name, :sort_order, :status)';
+            . 'VALUES (:name, :sort_order, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);

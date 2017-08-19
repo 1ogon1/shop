@@ -15,15 +15,60 @@ class Product
      * @param type $page [optional] <p>Номер текущей страницы</p>
      * @return array <p>Массив с товарами</p>
      */
-    public static function getLatestProducts($count = self::SHOW_BY_DEFAULT)
+    public static function getLatestProducts($page = 1)
+    {
+//		$limit = Product::SHOW_BY_DEFAULT;
+        $limit = 9;
+
+        // Смещение (для запроса)
+        $offset = ($page - 1) * 9;
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'SELECT id, name, price, is_new FROM product '
+            . 'WHERE status = "1" ORDER BY id DESC '
+            . 'LIMIT :limit OFFSET :offset';
+
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $result->bindParam(':offset', $offset, PDO::PARAM_INT);
+
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        // Выполнение коменды
+        $result->execute();
+
+        // Получение и возврат результатов
+        $i = 0;
+        $productsList = array();
+        while ($row = $result->fetch()) {
+            $productsList[$i]['id'] = $row['id'];
+            $productsList[$i]['name'] = $row['name'];
+            $productsList[$i]['price'] = $row['price'];
+            $productsList[$i]['is_new'] = $row['is_new'];
+            $i++;
+        }
+        return $productsList;
+    }
+
+    /**
+     * Возвращает массив последних товаров
+     * @param type $count [optional] <p>Количество</p>
+     * @param type $page [optional] <p>Номер текущей страницы</p>
+     * @return array <p>Массив с товарами</p>
+     */
+    public static function getLatestProductsIndex($count = self::SHOW_BY_DEFAULT)
     {
         // Соединение с БД
         $db = Db::getConnection();
 
         // Текст запроса к БД
         $sql = 'SELECT id, name, price, is_new FROM product '
-                . 'WHERE status = "1" ORDER BY id DESC '
-                . 'LIMIT :count';
+            . 'WHERE status = "1" ORDER BY id DESC '
+            . 'LIMIT :count';
 
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -31,7 +76,7 @@ class Product
 
         // Указываем, что хотим получить данные в виде массива
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        
+
         // Выполнение коменды
         $result->execute();
 
@@ -65,8 +110,8 @@ class Product
 
         // Текст запроса к БД
         $sql = 'SELECT id, name, price, is_new FROM product '
-                . 'WHERE status = 1 AND category_id = :category_id '
-                . 'ORDER BY id ASC LIMIT :limit OFFSET :offset';
+            . 'WHERE status = 1 AND category_id = :category_id '
+            . 'ORDER BY id ASC LIMIT :limit OFFSET :offset';
 
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -115,6 +160,30 @@ class Product
 
         // Получение и возврат результатов
         return $result->fetch();
+    }
+
+    /**
+     * Возвращаем количество товаров
+     * @return integer
+     */
+    public static function getTotalProducts()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        // Текст запроса к БД
+        $sql = 'SELECT count(id) AS count FROM product WHERE status="1"';
+
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+//		$result->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+
+        // Выполнение коменды
+        $result->execute();
+
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+        return $row['count'];
     }
 
     /**
@@ -187,8 +256,8 @@ class Product
 
         // Получение и возврат результатов
         $result = $db->query('SELECT id, name, price, is_new FROM product '
-                . 'WHERE status = "1" AND is_recommended = "1" '
-                . 'ORDER BY id DESC');
+            . 'WHERE status = "1" AND is_recommended = "1" '
+            . 'ORDER BY id DESC');
         $i = 0;
         $productsList = array();
         while ($row = $result->fetch()) {
@@ -270,14 +339,16 @@ class Product
             WHERE id = :id";
 
         // Получение и возврат результатов. Используется подготовленный запрос
+        $brand = '';
+        $availability = 0;
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
         $result->bindParam(':code', $options['code'], PDO::PARAM_STR);
         $result->bindParam(':price', $options['price'], PDO::PARAM_STR);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':brand', $options['brand'], PDO::PARAM_STR);
-        $result->bindParam(':availability', $options['availability'], PDO::PARAM_INT);
+        $result->bindParam(':brand', $brand, PDO::PARAM_STR);
+        $result->bindParam(':availability', $availability, PDO::PARAM_INT);
         $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
         $result->bindParam(':is_new', $options['is_new'], PDO::PARAM_INT);
         $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);
@@ -297,20 +368,22 @@ class Product
 
         // Текст запроса к БД
         $sql = 'INSERT INTO product '
-                . '(name, code, price, category_id, brand, availability,'
-                . 'description, is_new, is_recommended, status)'
-                . 'VALUES '
-                . '(:name, :code, :price, :category_id, :brand, :availability,'
-                . ':description, :is_new, :is_recommended, :status)';
+            . '(name, code, price, category_id, brand, availability,'
+            . 'description, is_new, is_recommended, status)'
+            . 'VALUES '
+            . '(:name, :code, :price, :category_id, :brand, :availability,'
+            . ':description, :is_new, :is_recommended, :status)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
+        $brand = '';
+        $availability = 0;
         $result = $db->prepare($sql);
         $result->bindParam(':name', $options['name'], PDO::PARAM_STR);
         $result->bindParam(':code', $options['code'], PDO::PARAM_STR);
         $result->bindParam(':price', $options['price'], PDO::PARAM_STR);
         $result->bindParam(':category_id', $options['category_id'], PDO::PARAM_INT);
-        $result->bindParam(':brand', $options['brand'], PDO::PARAM_STR);
-        $result->bindParam(':availability', $options['availability'], PDO::PARAM_INT);
+        $result->bindParam(':brand', $brand, PDO::PARAM_STR);
+        $result->bindParam(':availability', $availability, PDO::PARAM_INT);
         $result->bindParam(':description', $options['description'], PDO::PARAM_STR);
         $result->bindParam(':is_new', $options['is_new'], PDO::PARAM_INT);
         $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);

@@ -29,6 +29,9 @@
                         <p>Телефон клиента</p>
                         <input type="text" name="userPhone" placeholder="" value="<?php echo $order['user_phone']; ?>">
 
+                        <p>E-mail клиента</p>
+                        <input type="email" name="userEmail" placeholder="" value="<?php echo $order['user_email']; ?>">
+
                         <p>Комментарий клиента</p>
                         <input type="text" name="userComment" placeholder="" value="<?php echo $order['user_comment']; ?>">
 

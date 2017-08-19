@@ -36,6 +36,10 @@
                     <td><?php echo $order['user_phone']; ?></td>
                 </tr>
                 <tr>
+                    <td>E-mail клиента</td>
+                    <td><?php echo $order['user_email']; ?></td>
+                </tr>
+                <tr>
                     <td>Комментарий клиента</td>
                     <td><?php echo $order['user_comment']; ?></td>
                 </tr>

@@ -15,7 +15,7 @@ class SiteController
         $categories = Category::getCategoriesList();
 
         // Список последних товаров
-        $latestProducts = Product::getLatestProducts(6);
+        $latestProducts = Product::getLatestProductsIndex(6);
 
         // Список товаров для слайдера
         $sliderProducts = Product::getRecommendedProducts();
@@ -38,7 +38,7 @@ class SiteController
 
         // Обработка формы
         if (isset($_POST['submit'])) {
-            // Если форма отправлена 
+            // Если форма отправлена
             // Получаем данные из формы
             $userEmail = $_POST['userEmail'];
             $userText = $_POST['userText'];
@@ -53,8 +53,8 @@ class SiteController
 
             if ($errors == false) {
                 // Если ошибок нет
-                // Отправляем письмо администратору 
-                $adminEmail = 'php.start@mail.ru';
+                // Отправляем письмо администратору
+                $adminEmail = 'larisamyshop@gmail.com';
                 $message = "Текст: {$userText}. От {$userEmail}";
                 $subject = 'Тема письма';
                 $result = mail($adminEmail, $subject, $message);
@@ -66,7 +66,7 @@ class SiteController
         require_once(ROOT . '/views/site/contact.php');
         return true;
     }
-    
+
     /**
      * Action для страницы "О магазине"
      */

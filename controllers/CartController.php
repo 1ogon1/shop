@@ -32,7 +32,7 @@ class CartController
         echo Cart::addProduct($id);
         return true;
     }
-    
+
     /**
      * Action для добавления товара в корзину синхронным запросом
      * @param integer $id <p>id товара</p>
@@ -79,7 +79,7 @@ class CartController
      */
     public function actionCheckout()
     {
-        // Получием данные из корзины      
+        // Получием данные из корзины
         $productsInCart = Cart::getProducts();
 
         // Если товаров нет, отправляем пользователи искать товары на главную
@@ -124,6 +124,7 @@ class CartController
             // Получаем данные из формы
             $userName = $_POST['userName'];
             $userPhone = $_POST['userPhone'];
+            $userEmail = $_POST['userEmail'];
             $userComment = $_POST['userComment'];
 
 //            echo $userName;
@@ -140,20 +141,27 @@ class CartController
             if (!User::checkPhone($userPhone)) {
                 $errors[] = 'Неправильный телефон';
             }
+            if (!User::checkEmail($userEmail)) {
+                $errors[] = 'Неправильный e-mail';
+            }
 
 
             if ($errors == false) {
                 // Если ошибок нет
                 // Сохраняем заказ в базе данных
-                $result = Order::save($userName, $userPhone, $userComment, $userId, $productsInCart);
+                $result = Order::save($userName, $userPhone, $userEmail, $userComment, $userId, $productsInCart);
 
                 if ($result) {
                     // Если заказ успешно сохранен
-                    // Оповещаем администратора о новом заказе по почте                
-                    $adminEmail = 'konovalenkoruslan@gmail.com';
-                    $message = '<a href="http://localhost:8080/admin/order">Список заказов</a>';
+                    // Оповещаем администратора о новом заказе по почте
+                    $adminEmail = 'larisamyshop@gmail.com';
+                    $headers = "Content-Type: text/html; charset=utf-8" . "\r\n";
+                    $r1 = '<h1>На сайте новый заказ!</h1>';
+                    $r2 = '<p>Перейти к просмотру  заказов можно по ссыдке ниже</p>';
+                    $r3 = '<a href="https://solo-shop.000webhostapp.com/admin/order">Перейти</a>';
+                    $message = $r1 . $r2 . $r3;
                     $subject = 'Новый заказ!';
-                    mail($adminEmail, $subject, $message);
+                    mail($adminEmail, $subject, $message, $headers);
 
                     // Очищаем корзину
                     Cart::clear();

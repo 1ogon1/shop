@@ -40,7 +40,7 @@ class UserController
             if (User::checkEmailExists($email)) {
                 $errors[] = 'Такой email уже используется';
             }
-            
+
             if ($errors == false) {
                 // Если ошибок нет
                 // Регистрируем пользователя
@@ -61,7 +61,7 @@ class UserController
         // Переменные для формы
         $email = false;
         $password = false;
-        
+
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена 
@@ -106,11 +106,11 @@ class UserController
     public function actionLogout()
     {
         // Стартуем сессию
-        session_start();
-        
+        // session_start();
+
         // Удаляем информацию о пользователе из сессии
         unset($_SESSION["user"]);
-        
+
         // Перенаправляем пользователя на главную страницу
         header("Location: /");
     }

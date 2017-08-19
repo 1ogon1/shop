@@ -7,7 +7,7 @@ class User
 {
 
     /**
-     * Регистрация пользователя 
+     * Регистрация пользователя
      * @param string $name <p>Имя</p>
      * @param string $email <p>E-mail</p>
      * @param string $password <p>Пароль</p>
@@ -20,7 +20,7 @@ class User
 
         // Текст запроса к БД
         $sql = 'INSERT INTO user (name, email, password) '
-                . 'VALUES (:name, :email, :password)';
+            . 'VALUES (:name, :email, :password)';
 
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);

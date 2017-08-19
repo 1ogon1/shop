@@ -40,12 +40,13 @@ class AdminOrderController extends AdminBase
             // Получаем данные из формы
             $userName = $_POST['userName'];
             $userPhone = $_POST['userPhone'];
+            $userEmail = $_POST['userEmail'];
             $userComment = $_POST['userComment'];
             $date = $_POST['date'];
             $status = $_POST['status'];
 
             // Сохраняем изменения
-            Order::updateOrderById($id, $userName, $userPhone, $userComment, $date, $status);
+            Order::updateOrderById($id, $userName, $userPhone, $userEmail, $userComment, $date, $status);
 
             // Перенаправляем пользователя на страницу управлениями заказами
             header("Location: /admin/order/view/$id");

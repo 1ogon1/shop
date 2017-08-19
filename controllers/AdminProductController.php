@@ -42,8 +42,8 @@ class AdminProductController extends AdminBase
             $options['code'] = $_POST['code'];
             $options['price'] = $_POST['price'];
             $options['category_id'] = $_POST['category_id'];
-            $options['brand'] = $_POST['brand'];
-            $options['availability'] = $_POST['availability'];
+//            $options['brand'] = $_POST['brand'];
+//            $options['availability'] = $_POST['availability'];
             $options['description'] = $_POST['description'];
             $options['is_new'] = $_POST['is_new'];
             $options['is_recommended'] = $_POST['is_recommended'];
@@ -103,8 +103,8 @@ class AdminProductController extends AdminBase
             $options['code'] = $_POST['code'];
             $options['price'] = $_POST['price'];
             $options['category_id'] = $_POST['category_id'];
-            $options['brand'] = $_POST['brand'];
-            $options['availability'] = $_POST['availability'];
+//            $options['brand'] = $_POST['brand'];
+//            $options['availability'] = $_POST['availability'];
             $options['description'] = $_POST['description'];
             $options['is_new'] = $_POST['is_new'];
             $options['is_recommended'] = $_POST['is_recommended'];
@@ -119,7 +119,7 @@ class AdminProductController extends AdminBase
                 if (is_uploaded_file($_FILES["image"]["tmp_name"])) {
 
                     // Если загружалось, переместим его в нужную папке, дадим новое имя
-                   move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/products/{$id}.jpg");
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . "/upload/images/products/{$id}.jpg");
                 }
             }
 

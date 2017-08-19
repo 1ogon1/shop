@@ -1,4 +1,4 @@
-    <div class="page-buffer"></div>
+<div class="page-buffer"></div>
 </div>
 
 <footer id="footer" class="page-footer"><!--Footer-->

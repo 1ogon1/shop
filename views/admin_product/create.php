@@ -37,7 +37,7 @@
                         <p>Артикул</p>
                         <input type="text" name="code" placeholder="" value="">
 
-                        <p>Стоимость, $</p>
+                        <p>Стоимость: грн.</p>
                         <input type="text" name="price" placeholder="" value="">
 
                         <p>Категория</p>
@@ -53,8 +53,8 @@
 
                         <br/><br/>
 
-                        <p>Производитель</p>
-                        <input type="text" name="brand" placeholder="" value="">
+                        <!--                        <p>Производитель</p>-->
+                        <!--                        <input type="text" name="brand" placeholder="" value="">-->
 
                         <p>Изображение товара</p>
                         <input type="file" name="image" placeholder="" value="">
@@ -62,13 +62,13 @@
                         <p>Детальное описание</p>
                         <textarea name="description"></textarea>
 
-                        <br/><br/>
+                        <!--                        <br/><br/>-->
 
-                        <p>Наличие на складе</p>
-                        <select name="availability">
-                            <option value="1" selected="selected">Да</option>
-                            <option value="0">Нет</option>
-                        </select>
+                        <!--                        <p>Наличие на складе</p>-->
+                        <!--                        <select name="availability">-->
+                        <!--                            <option value="1" selected="selected">Да</option>-->
+                        <!--                            <option value="0">Нет</option>-->
+                        <!--                        </select>-->
 
                         <br/><br/>
 
