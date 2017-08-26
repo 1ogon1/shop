@@ -31,7 +31,16 @@
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="<?php echo Product::getImage($product['id']); ?>" alt="" width="200px" height="200px"/>
+
+											<?php $res = Product::getOneImage($product['id']); ?>
+
+											<?php foreach ($res as $row) : ?>
+
+												<img src="<?php echo $row['src']; ?>" alt="" width="200px" height="200px"/>
+
+											<?php endforeach; ?>
+
+<!--                                            <img src="--><?php //echo Product::getImage($product['id']); ?><!--" alt="" width="200px" height="200px"/>-->
                                             <h2><?php echo $product['price'];?> грн.</h2>
                                             <p>
                                                 <a href="/product/<?php echo $product['id'];?>">

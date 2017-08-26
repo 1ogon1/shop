@@ -29,7 +29,7 @@
 
             <div class="col-lg-4">
                 <div class="login-form">
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="#" method="post">
 
                         <p>Название товара</p>
                         <input type="text" name="name" placeholder="" value="">
@@ -55,9 +55,6 @@
 
                         <!--                        <p>Производитель</p>-->
                         <!--                        <input type="text" name="brand" placeholder="" value="">-->
-
-                        <p>Изображение товара</p>
-                        <input type="file" name="image" placeholder="" value="">
 
                         <p>Детальное описание</p>
                         <textarea name="description"></textarea>
@@ -103,6 +100,14 @@
                     </form>
                 </div>
             </div>
+<!--            <div class="col-lg-4">-->
+<!--                <form method="post" action="#"  enctype="multipart/form-data">-->
+<!--                    <p>Изображение товара</p>-->
+<!--                    <input type="file" name="image" placeholder="" value="">-->
+<!--                    <br>-->
+<!--                    <input type="submit" name="img" class="btn btn-default" value="Добавить">-->
+<!--                </form>-->
+<!--            </div>-->
 
         </div>
     </div>

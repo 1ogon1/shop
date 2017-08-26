@@ -389,7 +389,12 @@ class Product
         $result->bindParam(':is_recommended', $options['is_recommended'], PDO::PARAM_INT);
         $result->bindParam(':status', $options['status'], PDO::PARAM_INT);
         if ($result->execute()) {
+        	$id = $db->lastInsertId();
             // Если запрос выполенен успешно, возвращаем id добавленной записи
+			$sql = "INSERT INTO image (id_product) VALUES (:id_product)";
+			$stmt = $db->prepare($sql);
+			$stmt->bindParam(':id_product', $id, PDO::PARAM_INT);
+			$stmt->execute();
             return $db->lastInsertId();
         }
         // Иначе возвращаем 0
@@ -414,6 +419,17 @@ class Product
         }
     }
 
+    public static function addImage($img, $id)
+    {
+        $pdo = Db::getConnection();
+
+        $stmt = $pdo->prepare("INSERT INTO image (id_product, src) VALUES (?, ?)");
+        $stmt->execute([
+            $id,
+            $img
+        ]);
+    }
+
     /**
      * Возвращает путь к изображению
      * @param integer $id
@@ -422,22 +438,43 @@ class Product
     public static function getImage($id)
     {
         // Название изображения-пустышки
-        $noImage = 'no-image.jpg';
+        $noImage['src'] = '/upload/images/products/no-image.jpg';
 
-        // Путь к папке с товарами
-        $path = '/upload/images/products/';
+        $pdo = Db::getConnection();
 
-        // Путь к изображению товара
-        $pathToProductImage = $path . $id . '.jpg';
+        $stmt = $pdo->prepare("SELECT * FROM image WHERE id_product = ?");
+        $stmt->execute([$id]);
 
-        if (file_exists($_SERVER['DOCUMENT_ROOT'].$pathToProductImage)) {
-            // Если изображение для товара существует
-            // Возвращаем путь изображения товара
-            return $pathToProductImage;
+        if ($stmt->rowCount()) {
+        	if ($stmt->rowCount() > 1) {
+        		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        		unset($res[0]);
+        		return $res;
+			}
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         // Возвращаем путь изображения-пустышки
-        return $path . $noImage;
+        return $noImage;
     }
+
+	public static function getOneImage($id)
+	{
+		// Название изображения-пустышки
+		$noImage['src'] = '/upload/images/products/no-image.jpg';
+
+		$pdo = Db::getConnection();
+
+		$stmt = $pdo->prepare("SELECT src FROM image WHERE id_product = ? ORDER BY id DESC LIMIT 1");
+		$stmt->execute([$id]);
+
+		if ($stmt->rowCount()) {
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		// Возвращаем путь изображения-пустышки
+		return $noImage;
+	}
 
 }
