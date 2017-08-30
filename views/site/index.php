@@ -36,7 +36,7 @@
 
 											<?php foreach ($res as $row) : ?>
 
-												<img src="<?php echo $row['src']; ?>" alt="" width="200px" height="200px"/>
+												<img src="<?php echo $row['src']; ?>" alt=""/>
 
 											<?php endforeach; ?>
 

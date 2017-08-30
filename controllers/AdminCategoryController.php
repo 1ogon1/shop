@@ -12,6 +12,9 @@ class AdminCategoryController extends AdminBase
      */
     public function actionIndex()
     {
+		//Добавляем title
+		$title = 'Управление категориями';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -28,6 +31,9 @@ class AdminCategoryController extends AdminBase
      */
     public function actionCreate()
     {
+		//Добавляем title
+		$title = 'Добавить категорию';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -67,6 +73,9 @@ class AdminCategoryController extends AdminBase
      */
     public function actionUpdate($id)
     {
+		//Добавляем title
+		$title = 'Редактировать категорию';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -98,6 +107,9 @@ class AdminCategoryController extends AdminBase
      */
     public function actionDelete($id)
     {
+		//Добавляем title
+		$title = 'Удалить категорию';
+
         // Проверка доступа
         self::checkAdmin();
 

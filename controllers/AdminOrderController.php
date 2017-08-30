@@ -12,6 +12,9 @@ class AdminOrderController extends AdminBase
      */
     public function actionIndex()
     {
+		//Добавляем title
+		$title = 'Управление заказами';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -28,6 +31,9 @@ class AdminOrderController extends AdminBase
      */
     public function actionUpdate($id)
     {
+		//Добавляем title
+		$title = 'Редактирование заказа';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -62,6 +68,9 @@ class AdminOrderController extends AdminBase
      */
     public function actionView($id)
     {
+		//Добавляем title
+		$title = 'Просмотр заказа';
+
         // Проверка доступа
         self::checkAdmin();
 
@@ -87,6 +96,9 @@ class AdminOrderController extends AdminBase
      */
     public function actionDelete($id)
     {
+		//Добавляем title
+		$title = 'Удалить заказ';
+
         // Проверка доступа
         self::checkAdmin();
 

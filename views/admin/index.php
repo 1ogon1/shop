@@ -6,7 +6,7 @@
 
             <br/>
 
-            <h4>Добрый день, администратор!</h4>
+            <h4>Добрый день, <?php echo $name;?>!</h4>
 
             <br/>
 
@@ -18,6 +18,7 @@
                 <li><a href="/admin/product">Управление товарами</a></li>
                 <li><a href="/admin/category">Управление категориями</a></li>
                 <li><a href="/admin/order">Управление заказами</a></li>
+				<li><a href="/admin/profile">Изменить пароль</a></li>
             </ul>
 
         </div>

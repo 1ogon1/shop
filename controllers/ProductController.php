@@ -13,6 +13,9 @@ class ProductController
      */
     public function actionView($productId)
     {
+		//Добавляем title
+		$title = Product::getProductNameById($productId);
+
         // Список категорий для левого меню
         $categories = Category::getCategoriesList();
 

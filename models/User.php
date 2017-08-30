@@ -67,20 +67,23 @@ class User
         $db = Db::getConnection();
 
         // Текст запроса к БД
-        $sql = 'SELECT * FROM user WHERE email = :email AND password = :password';
+        $sql = 'SELECT * FROM user WHERE email = :email';
 
         // Получение результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':email', $email, PDO::PARAM_INT);
-        $result->bindParam(':password', $password, PDO::PARAM_INT);
         $result->execute();
 
         // Обращаемся к записи
         $user = $result->fetch();
 
         if ($user) {
-            // Если запись существует, возвращаем id пользователя
-            return $user['id'];
+            // Если запись существует и пароли совпадают, возвращаем id пользователя ина
+			if (password_verify($password, $user['password'])) {
+				return $user['id'];
+			} else {
+				return false;
+			}
         }
         return false;
     }
@@ -220,5 +223,33 @@ class User
 
         return $result->fetch();
     }
+
+    public static function changePassword($password)
+	{
+		$pdo = Db::getConnection();
+
+		$sql = "UPDATE user SET password = :password WHERE id = :id";
+
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':id', $_SESSION['user'], PDO::PARAM_INT);
+		$stmt->bindParam(':password', $password, PDO::PARAM_STR);
+		$res = $stmt->execute();
+		if ($res) {
+			return true;
+		}
+		return false;
+	}
+
+	public static function getUserNameById($id)
+	{
+		$pdo = Db::getConnection();
+
+		$sql = "SELECT name FROM user WHERE id = :id";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+		$user = $stmt->fetch();
+		return $user['name'];
+	}
 
 }

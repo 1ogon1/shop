@@ -51,6 +51,9 @@ class CartController
      */
     public function actionIndex()
     {
+		//Добавляем title
+		$title = 'Корзина';
+
         // Список категорий для левого меню
         $categories = Category::getCategoriesList();
 
@@ -79,6 +82,9 @@ class CartController
      */
     public function actionCheckout()
     {
+		//Добавляем title
+		$title = 'Заказать';
+
         // Получием данные из корзины
         $productsInCart = Cart::getProducts();
 

@@ -11,6 +11,9 @@ class SiteController
      */
     public function actionIndex()
     {
+    	//Добавляем title
+		$title = 'Главная';
+
         // Список категорий для левого меню
         $categories = Category::getCategoriesList();
 
@@ -30,6 +33,8 @@ class SiteController
      */
     public function actionContact()
     {
+		//Добавляем title
+		$title = 'Контакты';
 
         // Переменные для формы
         $userEmail = false;

@@ -12,6 +12,9 @@ class CatalogController
      */
     public function actionIndex($page = 1)
     {
+		//Добавляем title
+		$title = 'Каталог товаров';
+
         // Список категорий для левого меню
         $categories = Category::getCategoriesList();
 
@@ -34,6 +37,9 @@ class CatalogController
      */
     public function actionCategory($categoryId, $page = 1)
     {
+		//Добавляем title
+		$title = Category::getCategoryNameById($categoryId);
+
         // Список категорий для левого меню
         $categories = Category::getCategoriesList();
 

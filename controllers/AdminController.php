@@ -11,8 +11,13 @@ class AdminController extends AdminBase
      */
     public function actionIndex()
     {
+    	//Добавляем title
+		$title = 'Админпанель';
+
         // Проверка доступа
         self::checkAdmin();
+
+        $name = User::getUserNameById($_SESSION['user']);
 
         // Подключаем вид
         require_once(ROOT . '/views/admin/index.php');

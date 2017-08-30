@@ -173,4 +173,17 @@ class Category
         return $result->execute();
     }
 
+    public static function getCategoryNameById($id_category)
+	{
+		$pdo = Db::getConnection();
+
+		$sql = "SELECT name FROM category WHERE id = :id";
+
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':id', $id_category, PDO::PARAM_INT);
+		$stmt->execute();
+		$res = $stmt->fetch();
+		return $res['name'];
+	}
+
 }

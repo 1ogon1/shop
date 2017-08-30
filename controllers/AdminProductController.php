@@ -12,6 +12,9 @@ class AdminProductController extends AdminBase
 	 */
 	public function actionIndex()
 	{
+		//Добавляем title
+		$title = 'Управление товарами';
+
 		// Проверка доступа
 		self::checkAdmin();
 
@@ -28,6 +31,9 @@ class AdminProductController extends AdminBase
 	 */
 	public function actionCreate()
 	{
+		//Добавляем title
+		$title = 'Добавить товар';
+
 		// Проверка доступа
 		self::checkAdmin();
 
@@ -86,6 +92,9 @@ class AdminProductController extends AdminBase
 	 */
 	public function actionUpdate($id)
 	{
+		//Добавляем title
+		$title = 'Редактировать товар';
+
 		// Проверка доступа
 		self::checkAdmin();
 
@@ -156,6 +165,9 @@ class AdminProductController extends AdminBase
 	 */
 	public function actionDelete($id)
 	{
+		//Добавляем title
+		$title = 'Удалить товар';
+
 		// Проверка доступа
 		self::checkAdmin();
 

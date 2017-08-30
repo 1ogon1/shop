@@ -477,4 +477,15 @@ class Product
 		return $noImage;
 	}
 
+	public static function getProductNameById($id_product)
+	{
+		$pdo = Db::getConnection();
+
+		$sql = "SELECT name FROM product WHERE id = :id";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':id', $id_product, PDO::PARAM_INT);
+		$stmt->execute();
+		$res = $stmt->fetch();
+		return $res['name'];
+	}
 }
