@@ -24,6 +24,7 @@
                     <th>Имя покупателя</th>
                     <th>Телефон покупателя</th>
                     <th>E-mail покупателя</th>
+					<th>Розмір</th>
                     <th>Дата оформления</th>
                     <th>Статус</th>
                     <th></th>
@@ -40,6 +41,7 @@
                         <td><?php echo $order['user_name']; ?></td>
                         <td><?php echo $order['user_phone']; ?></td>
                         <td><?php echo $order['user_email']; ?></td>
+						<td><?php echo $order['user_size']; ?></td>
                         <td><?php echo $order['date']; ?></td>
                         <td><?php echo Order::getStatusText($order['status']); ?></td>
                         <td><a href="/admin/order/view/<?php echo $order['id']; ?>" title="Смотреть"><i class="fa fa-eye"></i></a></td>

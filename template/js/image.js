@@ -3,18 +3,12 @@ $('.all-img').mouseenter(function () {
 	$('#big-img').attr('src', src);
 });
 
-$('.adm-img').click(function () {
-	var param = {
-			id: $(this).data('text'),
-			src: $(this).data('src')
-		},
-		id = $(this).data('id');
-	// console.log($(this).data('id'));
+$(document).click(function () {
+	var checkboxes = $('input[type=checkbox]:checked');
 
-	$.post('/admDelImg', param, function (data) {
-		console.log(data);
-		if (data) {
-			$(location).attr('href', '/admin/product/update/' + id);
-		}
-	});
+	if (checkboxes.length) {
+		$('#delete').removeClass('disabled');
+	} else {
+		$('#delete').addClass('disabled');
+	}
 });

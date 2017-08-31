@@ -39,6 +39,10 @@
                     <td>E-mail клиента</td>
                     <td><?php echo $order['user_email']; ?></td>
                 </tr>
+				<tr>
+					<td>Розмір</td>
+					<td><?php echo $order['user_size']; ?></td>
+				</tr>
                 <tr>
                     <td>Комментарий клиента</td>
                     <td><?php echo $order['user_comment']; ?></td>

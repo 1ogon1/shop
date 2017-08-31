@@ -488,4 +488,22 @@ class Product
 		$res = $stmt->fetch();
 		return $res['name'];
 	}
+
+	public static function deleteImageById($id)
+	{
+		$pdo = Db::getConnection();
+
+		$sql = "DELETE FROM image WHERE id = :id";
+		$sql2 = "SELECT src FROM image WHERE id = :id";
+		$stmt = $pdo->prepare($sql2);
+		$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+		$res = $stmt->fetch();
+		if ($res) {
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			unlink(ROOT . $res['src']);
+		}
+	}
 }

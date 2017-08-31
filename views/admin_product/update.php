@@ -121,12 +121,15 @@
 
 								<?php if (strcmp($row['src'], "/upload/images/products/no-image.jpg")) : ?>
 
-									<div class="adm-img" data-text="<?php echo $row['id'] ?>"
-										 data-src="<?php echo $row['src'] ?>" data-id="<?php echo $row['id_product'] ?>"
-										 style="width: 20px; height: 20px; background-image: url(/template/images/shop/close.gif); float: right; position: absolute;"></div>
+<!--									<div class="adm-img" data-text="--><?php //echo $row['id'] ?><!--"-->
+<!--										 data-src="--><?php //echo $row['src'] ?><!--" data-id="--><?php //echo $row['id_product'] ?><!--"-->
+<!--										 style="width: 20px; height: 20px; background-image: url(/template/images/shop/close.gif); float: right; position: absolute;">-->
+<!--									</div>-->
+									<div style="width: 20px; height: 20px; float: right; position: absolute;">
+										<input type="checkbox" name="imageId[]" value="<?php echo $row['id'] ?>">
+									</div>
 
 								<?php endif; ?>
-
 								<img src="<?php echo $row['src'] ?>" width="100" alt=""/>
 							</div>
 
@@ -137,6 +140,7 @@
 					<input type="file" name="image" placeholder="" accept="image/*">
 					<br>
 					<input type="submit" name="add_img" class="btn btn-default" value="Добавить">
+					<input type="submit" name="del_img" class="btn btn-group disabled" value="Удалить" id="delete">
 				</form>
 			</div>
 

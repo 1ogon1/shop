@@ -128,10 +128,11 @@ class CartController
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Получаем данные из формы
-            $userName = $_POST['userName'];
-            $userPhone = $_POST['userPhone'];
-            $userEmail = $_POST['userEmail'];
-            $userComment = $_POST['userComment'];
+            $userName = htmlspecialchars($_POST['userName']);
+            $userPhone = htmlspecialchars($_POST['userPhone']);
+            $userEmail = htmlspecialchars($_POST['userEmail']);
+            $userSize = htmlspecialchars($_POST['userSize']);
+            $userComment = htmlspecialchars($_POST['userComment']);
 
 //            echo $userName;
 //			echo $userPhone;
@@ -155,7 +156,7 @@ class CartController
             if ($errors == false) {
                 // Если ошибок нет
                 // Сохраняем заказ в базе данных
-                $result = Order::save($userName, $userPhone, $userEmail, $userComment, $userId, $productsInCart);
+                $result = Order::save($userName, $userPhone, $userEmail, $userSize, $userComment, $userId, $productsInCart);
 
                 if ($result) {
                     // Если заказ успешно сохранен

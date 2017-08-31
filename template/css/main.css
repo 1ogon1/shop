@@ -2005,6 +2005,9 @@ h2.title {
     border-bottom: 1px solid #F7F7F0;
 }
 
+.textarea {
+    outline: none;
+}
 
 
 
@@ -2555,7 +2558,7 @@ h2.title {
 
 .recommended_items .product-image-wrapper
 {
-    height: 300px;
+    height: 400px;
 }
 .recommended_items .item
 {

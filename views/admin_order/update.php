@@ -32,6 +32,9 @@
                         <p>E-mail клиента</p>
                         <input type="email" name="userEmail" placeholder="" value="<?php echo $order['user_email']; ?>">
 
+						<p>Розмір</p>
+						<input type="text" name="userSize" placeholder="" value="<?php echo $order['user_size']; ?>">
+
                         <p>Комментарий клиента</p>
                         <input type="text" name="userComment" placeholder="" value="<?php echo $order['user_comment']; ?>">
 

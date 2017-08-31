@@ -155,6 +155,18 @@ class AdminProductController extends AdminBase
 			}
 		} //добавляем фото к товару
 
+		if (isset($_POST['del_img'])) {
+
+			$i = 0;
+			$arrayId = $_POST['imageId'];
+
+			if ($arrayId) {
+				for ($i = 0; $i < count($arrayId); $i++) {
+					Product::deleteImageById($arrayId[$i]);
+				}
+			}
+		} //удалим выбранные фото к товару
+
 		// Подключаем вид
 		require_once(ROOT . '/views/admin_product/update.php');
 		return true;
@@ -184,23 +196,6 @@ class AdminProductController extends AdminBase
 		// Подключаем вид
 		require_once(ROOT . '/views/admin_product/delete.php');
 		return true;
-	}
-
-	public function actionAdmDelImg()
-	{
-		$pdo = Db::getConnection();
-
-		$sql = "DELETE FROM image WHERE id = :id";
-		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam(':id', $_POST['id'], PDO::PARAM_INT);
-		$stmt->execute();
-		if ($stmt->rowCount()) {
-			unlink(ROOT . $_POST['src']);
-			echo 'ok';
-			exit;
-		}
-//		echo $_POST['id'];
-//		exit;
 	}
 
 }
