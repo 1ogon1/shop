@@ -10,6 +10,9 @@ class UserController
      */
     public function actionRegister()
     {
+        //Добавляем title
+        $title = 'Регистрация';
+
         // Переменные для формы
         $name = false;
         $email = false;
@@ -58,6 +61,9 @@ class UserController
      */
     public function actionLogin()
     {
+        //Добавляем title
+        $title = 'Авторизация';
+
         // Переменные для формы
         $email = false;
         $password = false;

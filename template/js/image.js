@@ -1,4 +1,4 @@
-$('.all-img').mouseenter(function () {
+$('.carousel-element').click(function () {
 	var src = $(this).children('img').attr('src');
 	$('#big-img').attr('src', src);
 });

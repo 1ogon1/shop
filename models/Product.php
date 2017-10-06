@@ -391,7 +391,7 @@ class Product
         if ($result->execute()) {
         	$id = $db->lastInsertId();
             // Если запрос выполенен успешно, возвращаем id добавленной записи
-			$sql = "INSERT INTO image (id_product) VALUES (:id_product)";
+			$sql = "INSERT INTO image (id, id_product, src) VALUES (null, :id_product, '/upload/images/products/no-image.jpg')";
 			$stmt = $db->prepare($sql);
 			$stmt->bindParam(':id_product', $id, PDO::PARAM_INT);
 			$stmt->execute();

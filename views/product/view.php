@@ -40,18 +40,22 @@
 
 								</div>
 
-								<div style="display: inline-block">
+                                <div id="carousel"> <!--carousel-->
 
-									<?php $res = Product::getImage($product['id']); ?>
+                                    <?php $res = Product::getImage($product['id']); ?>
 
-									<?php foreach ($res as $row) : ?>
-										<div class="all-img">
+                                    <?php foreach ($res as $row) : ?>
+                                        <div class="carousel-element">
+                                            <img src="<?php echo $row['src']; ?>" alt=""/>
+                                        </div>
 
-											<img src="<?php echo $row['src']; ?>" alt="" width="50px" height="50px"/>
+                                        <div class="carousel-element">
+                                            <img src="<?php echo $row['src']; ?>" alt=""/>
+                                        </div>
 
-										</div>
-									<?php endforeach; ?>
-								</div>
+                                    <?php endforeach; ?>
+
+                                </div><!--end carousel-->
 
 							</div>
 						</div>
@@ -96,3 +100,17 @@
 
 <?php include ROOT . '/views/layouts/footer.php'; ?>
 <script src="/template/js/image.js"></script>
+<script src="/template/js/carousel/owl.carousel.min.js"></script>
+<script>
+    $(document).ready(function(){
+
+        // Находим блок карусели
+        var carousel = $("#carousel");
+
+        // Запускаем плагин карусели
+        carousel.owlCarousel({
+            pagination: true
+//            items: 2
+        });
+    });
+</script>

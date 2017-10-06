@@ -1196,8 +1196,14 @@ h2.title {
     height: 50px;
 }
 
+.full-img {
+    margin-bottom: 5px;
+}
+
 .full-img img {
-    border: 1px solid #F7F7F0;
+    /*border: 1px solid #F7F7F0;*/
+    /*border: 2px solid grey;*/
+    border-radius: 5px;
     height: 380px;
     width: 100%;
 }

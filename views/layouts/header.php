@@ -14,7 +14,15 @@
     <link href="/template/css/animate.css" rel="stylesheet">
     <link href="/template/css/main.css" rel="stylesheet">
     <link href="/template/css/responsive.css" rel="stylesheet">
+<!---->
 
+
+    <link rel="stylesheet" href="/template/css/carousel/owl.carousel.css"/>
+
+
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow&v1' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' />
+<!---->
     <!--[if lt IE 9]>
     <script src="/template/js/html5shiv.js"></script>
     <script src="/template/js/respond.min.js"></script>
